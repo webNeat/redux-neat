@@ -1,4 +1,4 @@
-import reduz from '../src'
+import {create} from '../src'
 
 describe('simple use case', () => {
   type State = {
@@ -24,7 +24,7 @@ describe('simple use case', () => {
   }
   const initialState: State = {value: 0}
 
-  const {store, actions} = reduz(initialState, handlers)
+  const {store, actions} = create(initialState, handlers)
 
   it('handles counter actions', () => {
     expect(store.getState()).toEqual({value: 0})
