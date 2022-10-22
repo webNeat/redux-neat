@@ -11,5 +11,5 @@ export function makeActions<State, Fns extends Handlers<State>>(store: Store<Sta
     }
     actions[name] = isFunction(handler) ? fn : makeActions(store, handler as any, prefix + name + '.')
   }
-  return actions as Actions<Fns>
+  return actions
 }

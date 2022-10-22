@@ -3,7 +3,7 @@
   "author": "Amine Ben hammou",
   "description": "An opinionated and simple way to use Redux",
   "license": "MIT",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/module.js",

@@ -7,8 +7,7 @@ export type Handlers<State = any, Depth extends number = 5> = Record<
 >
 
 export type Actions<Fns extends Handlers> = {
-  // @ts-expect-error if Fns[key] doesn't extend HandlerFn then it extends Handlers
-  [key in keyof Fns]: Fns[key] extends HandlerFn ? Action<Fns[key]> : Actions<Fns[key]>
+  [key in keyof Fns]: Fns[key] extends HandlerFn ? Action<Fns[key]> : Fns[key] extends Handlers ? Actions<Fns[key]> : never
 }
 
 export type Action<Fn extends HandlerFn<any>> = Fn extends (a: any, ...args: infer Args) => any ? (...args: Args) => void : () => void
