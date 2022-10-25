@@ -5,10 +5,15 @@ import {makeReducer} from './makeReducer'
 import {Handlers, Actions} from './types'
 
 export function create<State, Fns extends Handlers<State>>(initialState: State, fns: Fns) {
-  const store = legacy_createStore(
-    makeReducer(initialState, flattenHandlers(fns)),
-    window && (window as any)?.__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  const store = legacy_createStore(makeReducer(initialState, flattenHandlers(fns)), getReduxDevtoolsReducer())
   const actions: Actions<Fns> = makeActions(store, fns)
   return {store, actions}
+}
+
+function getReduxDevtoolsReducer() {
+  try {
+    return (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  } catch {
+    return undefined
+  }
 }
