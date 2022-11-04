@@ -7,7 +7,7 @@ export function makeReducer<State, Fns extends Handlers<State, 1>>(initialState:
     for (const name in handlers) {
       if (action.type == name) {
         state = deepClone(state)
-        handlers[name](state, ...action.args)
+        state = handlers[name](state, ...action.args) || state
         return state
       }
     }
