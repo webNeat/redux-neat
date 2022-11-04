@@ -1,6 +1,6 @@
 import {Decrement} from 'just-types'
 
-export type HandlerFn<State = any> = (state: State, ...args: any[]) => State | undefined
+export type HandlerFn<State = any> = (state: State, ...args: any[]) => State | undefined | void
 export type Handlers<State = any, Depth extends number = 5> = Record<
   string,
   HandlerFn<State> | (Depth extends 1 ? never : Handlers<State, Decrement<Depth>>)
