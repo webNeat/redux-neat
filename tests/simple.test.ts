@@ -1,30 +1,35 @@
 import {create} from '../src'
 
 describe('simple use case', () => {
-  type State = {
-    value: number
-  }
-  const add = (state: State, n: number) => {
-    state.value += n
-    return state
-  }
-  const substract = (state: State, n: number) => {
-    state.value -= n
-    return state
-  }
-  const increment = (state: State) => add(state, 1)
-  const decrement = (state: State) => substract(state, 1)
-  const reset = (state: State) => substract(state, state.value)
+  type State = {value: number}
 
   const handlers = {
     math: {
-      arithmetic: {add, substract},
+      add: (state: State, n: number) => {
+        state.value += n
+      },
+      substract: (state: State, n: number) => {
+        state.value -= n
+      },
     },
-    counter: {increment, decrement, reset},
+    counter: {
+      increment: (state: State) => {
+        state.value++
+      },
+      decrement: (state: State) => {
+        state.value--
+      },
+      reset: (state: State) => {
+        state.value = 0
+      },
+    },
+  }
+  const getters = {
+    getValue: (state: State) => state.value,
   }
   const initialState: State = {value: 0}
 
-  const {store, actions} = create(initialState, handlers)
+  const {store, actions} = create(initialState, {handlers, getters})
 
   it('handles counter actions', () => {
     expect(store.getState()).toEqual({value: 0})
@@ -49,10 +54,10 @@ describe('simple use case', () => {
   it('handles arithmetic actions', () => {
     expect(store.getState()).toEqual({value: 0})
 
-    actions.math.arithmetic.add(5)
+    actions.math.add(5)
     expect(store.getState()).toEqual({value: 5})
 
-    actions.math.arithmetic.substract(3)
+    actions.math.substract(3)
     expect(store.getState()).toEqual({value: 2})
   })
 })

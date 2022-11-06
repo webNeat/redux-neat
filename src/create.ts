@@ -2,12 +2,14 @@ import {legacy_createStore} from 'redux'
 import {flattenHandlers} from './flattenHandlers'
 import {makeActions} from './makeActions'
 import {makeReducer} from './makeReducer'
-import {Handlers, Actions} from './types'
+import {makeSelectors} from './makeSelectors'
+import {Actions, StoreConfig, Selectors} from './types'
 
-export function create<State, Fns extends Handlers<State>>(initialState: State, fns: Fns) {
-  const store = legacy_createStore(makeReducer(initialState, flattenHandlers(fns)), getReduxDevtoolsReducer())
-  const actions: Actions<Fns> = makeActions(store, fns)
-  return {store, actions}
+export function create<State, Config extends StoreConfig<State>>(initialState: State, {handlers, getters}: Config) {
+  const store = legacy_createStore(makeReducer(initialState, flattenHandlers(handlers)), getReduxDevtoolsReducer())
+  const actions: Actions<Config['handlers']> = makeActions(store, handlers)
+  const selectors: Selectors<Config['getters']> = makeSelectors(store, getters)
+  return {store, actions, selectors}
 }
 
 function getReduxDevtoolsReducer() {
