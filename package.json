@@ -1,6 +1,6 @@
 {
   "name": "redux-neat",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0",
   "author": "Amine Ben hammou (@webneat)",
   "description": "An opinionated and simple way to use Redux",
   "repository": "webNeat/redux-neat",
