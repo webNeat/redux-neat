@@ -1,6 +1,6 @@
-import {Store} from 'redux'
+import type {Store} from 'redux'
+import type {Selectors, Getters, GetterFn} from './types'
 import {isFunction} from './utils'
-import {Selectors, Getters, GetterFn} from './types'
 import {useSelector} from 'react-redux'
 
 export function makeSelectors<State, Fns extends Getters<State>>(store: Store<State>, getters: Fns): Selectors<Fns> {
