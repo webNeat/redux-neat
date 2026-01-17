@@ -1,8 +1,9 @@
-import {Decrement} from 'just-types'
+import type {Decrement} from 'just-types'
 
 export type StoreConfig<State = any> = {
   handlers: Handlers<State>
   getters: Getters<State>
+  withDevTools?: boolean
 }
 
 export type HandlerFn<State = any> = (state: State, ...args: any[]) => State | undefined | void

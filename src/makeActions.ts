@@ -1,6 +1,6 @@
-import {Store} from 'redux'
+import type {Store} from 'redux'
+import type {Actions, Handlers} from './types'
 import {isFunction} from './utils'
-import {Actions, Handlers} from './types'
 
 export function makeActions<State, Fns extends Handlers<State>>(store: Store<State>, handlers: Fns, prefix = ''): Actions<Fns> {
   const actions = {} as any

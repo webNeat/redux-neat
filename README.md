@@ -9,4 +9,3 @@ An opinionated and simple way to use [Redux](https://redux.js.org/).
 [![Rank](https://img.shields.io/librariesio/sourcerank/npm/redux-neat?style=flat-square)](https://libraries.io/npm/redux-neat)
 [![Version](https://img.shields.io/npm/v/redux-neat?style=flat-square)](https://www.npmjs.com/package/redux-neat)
 [![MIT](https://img.shields.io/npm/l/redux-neat?style=flat-square)](LICENSE)
-

@@ -1,2 +1,2 @@
-export * from './create'
-export * from './types'
+export type * from './types'
+export {create} from './create'

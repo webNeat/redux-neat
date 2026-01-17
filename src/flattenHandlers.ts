@@ -1,5 +1,5 @@
 import {isFunction} from './utils'
-import {HandlerFn, Handlers} from './types'
+import type {HandlerFn, Handlers} from './types'
 
 export function flattenHandlers<State>(fns: Handlers<State>, prefix = ''): Handlers<State, 1> {
   let result: Record<string, HandlerFn<State>> = {}
