@@ -46,8 +46,8 @@
     "redux": "^5.0.1"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
