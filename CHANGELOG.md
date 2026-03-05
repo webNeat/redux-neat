@@ -1,5 +1,11 @@
 # redux-neat
 
+## 1.2.0
+
+### Minor Changes
+
+- [#5](https://github.com/webNeat/redux-neat/pull/5) [`67161fb`](https://github.com/webNeat/redux-neat/commit/67161fb94cc16219c13f64a563240808fba93650) Thanks [@webNeat](https://github.com/webNeat)! - Expose `getters` to be used like selectors
+
 ## 1.1.0
 
 ### Minor Changes
