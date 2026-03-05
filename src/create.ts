@@ -4,6 +4,7 @@ import {makeActions} from './makeActions'
 import {makeReducer} from './makeReducer'
 import {makeSelectors} from './makeSelectors'
 import type {Actions, StoreConfig, Selectors} from './types'
+import { makeGetters } from './makeGetters'
 
 export function create<State, Config extends StoreConfig<State>>(
   initialState: State,
@@ -13,7 +14,8 @@ export function create<State, Config extends StoreConfig<State>>(
   const store = legacy_createStore(makeReducer(initialState, flattenHandlers(handlers)), composeEnhancers())
   const actions: Actions<Config['handlers']> = makeActions(store, handlers)
   const selectors: Selectors<Config['getters']> = makeSelectors(store, getters)
-  return {store, actions, selectors}
+  const _getters: Selectors<Config['getters']> = makeGetters(store, getters)
+  return {store, actions, selectors, getters: _getters}
 }
 
 function getComposeEnhancers(withDevTools: boolean) {
