@@ -47,7 +47,7 @@ pnpm add redux-neat
 import {create} from 'redux-neat'
 
 // 1. Create store with handlers and getters
-const {store, actions, selectors} = create(
+const {store, actions, selectors, getters} = create(
   {count: 0}, // initial state
   {
     handlers: {
@@ -73,6 +73,9 @@ function Counter() {
   const count = selectors.count()
   return <div>{count}</div>
 }
+
+// 4. Use getters outside of React
+const currentCount = getters.count()
 ```
 
 That's it! No action types, no action creators, no reducers. Just handlers and getters.
@@ -119,10 +122,10 @@ Handlers can mutate the state directly.
 
 ## Defining getters
 
-Getters are functions that derive data from the state. They are converted to React hooks (selectors):
+Getters are functions that derive data from the state. They are returned as React hooks (`selectors`) to use inside components, and as regular functions (`getters`) to use outside of React:
 
 ```ts
-const {selectors} = create<State>(initialState, {
+const {selectors, getters} = create<State>(initialState, {
   handlers: {},
   getters: {
     // Simple getter
@@ -141,6 +144,11 @@ function MyComponent() {
   const isPositive = selectors.isPositive()
   // ...
 }
+
+// Outside of React
+const currentCount = getters.count()
+const currentCountPlus10 = getters.countPlusN(10)
+const currentlyPositive = getters.isPositive()
 ```
 
 ## Using nested handlers and getters
@@ -153,7 +161,7 @@ type State = {
   settings: {theme: 'light' | 'dark'}
 }
 
-const {actions, selectors} = create<State>(initialState, {
+const {actions, selectors, getters} = create<State>(initialState, {
   handlers: {
     user: {
       setName: (state, name: string) => {
@@ -188,6 +196,10 @@ actions.settings.toggleTheme()
 // Selectors mirror the nested structure (in React components)
 const name = selectors.user.name()
 const theme = selectors.settings.theme()
+
+// Getters mirror the nested structure (outside of React)
+const currentName = getters.user.name()
+const currentTheme = getters.settings.theme()
 ```
 
 In Redux DevTools, nested actions appear with dot notation: `user.setName`, `user.birthday`, `settings.toggleTheme`.
